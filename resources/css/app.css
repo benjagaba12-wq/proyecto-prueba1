@@ -9,3 +9,63 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+:root {
+    --aurora-1: #6d28d9;
+    --aurora-2: #a21caf;
+}
+
+.aurora-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(160deg, #07050c 0%, #120a1f 55%, #000000 100%);
+}
+
+.aurora-bg::before,
+.aurora-bg::after {
+    content: '';
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    will-change: transform;
+}
+
+.aurora-bg::before {
+    background: var(--aurora-1);
+    top: -10%;
+    left: -10%;
+    animation: aurora-drift-1 32s ease-in-out infinite;
+}
+
+.aurora-bg::after {
+    background: var(--aurora-2);
+    bottom: -15%;
+    right: -10%;
+    animation: aurora-drift-2 38s ease-in-out infinite;
+}
+
+@keyframes aurora-drift-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(8vw, 6vh) scale(1.15); }
+}
+
+@keyframes aurora-drift-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-6vw, -8vh) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aurora-bg::before,
+    .aurora-bg::after { animation: none; }
+}
+
+input,
+select,
+textarea {
+    color: var(--color-neutral-900);
+}

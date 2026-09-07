@@ -25,6 +25,6 @@ Route::get('/proyectos/{id}', [ProyectoController::class, 'show']);
 // pueda ser falsificado desde el cliente (ver ProyectoController::store).
 Route::middleware('validar.auth')->group(function () {
     Route::post('/proyectos', [ProyectoController::class, 'store']);
-    Route::put('/proyectos/{id}', [ProyectoController::class, 'update']);
+    Route::match(['put', 'patch'], '/proyectos/{id}', [ProyectoController::class, 'update']);
     Route::delete('/proyectos/{id}', [ProyectoController::class, 'destroy']);
 });

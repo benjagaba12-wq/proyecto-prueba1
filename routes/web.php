@@ -18,6 +18,10 @@ Route::post('/logout', [WebAuthController::class, 'logout'])->name('logout');
 // Listar y ver detalle de proyectos se mantienen públicos, tal como estaba.
 Route::get('/proyectos', [ProyectoController::class, 'vistaIndex'])->name('proyectos.index');
 
+// Búsqueda por ID: pública, igual que el listado. Va antes del comodín {id}
+// por la misma razón que /create, /edit y /delete.
+Route::get('/proyectos/buscar', [ProyectoController::class, 'vistaBuscar'])->name('proyectos.buscar');
+
 // Crear, editar y eliminar exige sesión iniciada (guard "web"). Van antes de
 // /proyectos/{id} porque si no, el comodín {id} capturaría "create" como id.
 Route::middleware('auth')->group(function () {

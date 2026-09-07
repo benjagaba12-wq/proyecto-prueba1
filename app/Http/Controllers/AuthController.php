@@ -19,12 +19,16 @@ class AuthController extends Controller
             'correo' => 'required|email|max:255|unique:users,correo',
             'clave'  => 'required|string|min:8|confirmed',
         ], [
-            'nombre.required' => 'El nombre es obligatorio.',
+           'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string'   => 'El nombre debe ser texto.',
+            'nombre.max'      => 'El nombre no puede superar los 100 caracteres.',
             'nombre.regex'    => 'El nombre solo debe contener letras y espacios simples entre palabras.',
             'correo.required' => 'El correo es obligatorio.',
             'correo.email'    => 'El correo debe ser una dirección válida.',
+            'correo.max'      => 'El correo no puede superar los 255 caracteres.',
             'correo.unique'   => 'Ese correo ya está registrado.',
             'clave.required'  => 'La clave es obligatoria.',
+            'clave.string'    => 'La clave debe ser texto.',
             'clave.min'       => 'La clave debe tener al menos 8 caracteres.',
             'clave.confirmed' => 'La confirmación de clave no coincide.',
         ]);
@@ -50,9 +54,10 @@ class AuthController extends Controller
             'correo' => 'required|email',
             'clave'  => 'required|string',
         ], [
-            'correo.required' => 'El correo es obligatorio.',
+           'correo.required' => 'El correo es obligatorio.',
             'correo.email'    => 'El correo debe ser una dirección válida.',
             'clave.required'  => 'La clave es obligatoria.',
+            'clave.string'    => 'La clave debe ser texto.',
         ]);
 
         $usuario = User::where('correo', $validated['correo'])->first();
